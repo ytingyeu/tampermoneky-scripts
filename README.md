@@ -1,2 +1,2 @@
-# tempermoneky-scripts
+# tampermoneky-scripts
 As repository name
