@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PlurkHtmlTitleAsUserTitle
 // @namespace    https://github.com/ytingyeu
-// @version      0.3
+// @version      0.3.1
 // @description  Replace HTML title with user page title
 // @author       Tingyeu Yang <ytingyeu@asu.edu>
 // @include      *://www.plurk.com/*
@@ -23,7 +23,6 @@
       const observer = new MutationObserver(function (mutations) {
         mutations.forEach((mutation) => {
           if (document.title !== userTitle) {
-            console.log(document.title)
             document.title = userTitle;
           }
         });
