@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PlurkHtmlTitleAsUserTitle
 // @namespace    https://github.com/ytingyeu
-// @version      0.2
+// @version      0.3
 // @description  Replace HTML title with user page title
 // @author       Tingyeu Yang <ytingyeu@asu.edu>
 // @include      *://www.plurk.com/*
@@ -14,9 +14,29 @@
   "use strict";
 
   function onLoad() {
-    let userTitleElement = document.getElementById("page_title");
+    const userTitleElement = document.getElementById("page_title");
+
     if (userTitleElement !== null) {
-      document.title = userTitleElement.innerText;
+      const userTitle = userTitleElement.innerText;
+      document.title = userTitle;
+
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach((mutation) => {
+          if (document.title !== userTitle) {
+            console.log(document.title)
+            document.title = userTitle;
+          }
+        });
+      });
+
+      const target = document.querySelector("title");
+
+      if (target !== null) {
+        const config = {
+          childList: true,
+        };
+        observer.observe(target, config);
+      }
     }
   }
 
